@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import Calendar from './Calendar';
+
 
 const Main = () => {
 
     return (
-        <div>
-            <h1>Hello World </h1>
+        <div id = 'flex-wrapper'>
+            <Calendar />
         </div>
     )
 
