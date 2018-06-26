@@ -1,0 +1,17 @@
+Event table:
+    Title
+    Description
+    Start Date
+    End Date
+    Start Time
+    End Time
+    AllDay - boolean
+
+
+One row for each event.
+Before sending list of events, go through each and see if Start Date != End Date, if so create 
+one event for each day.  
+
+reduce into  format = [date: {events}]
+
+in front end create component for each day of the month and populate with events.
