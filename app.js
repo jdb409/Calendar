@@ -19,10 +19,10 @@ app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')
 
 app.use('/api', require('./CalendarBackend/api'));
 
-seed()
-    .then(() => {
-        console.log('db synced');
+// seed()
+//     .then(() => {
+//         console.log('db synced');
         app.listen(PORT, () => {
             console.log(`listening on ${3000}`)
         });
-    })
+    // })

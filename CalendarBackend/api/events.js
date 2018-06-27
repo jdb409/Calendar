@@ -4,7 +4,16 @@ const { Event } = require('../db');
 router.get('/', (req, res) => {
     Event.findAll()
         .then(events => {
-            res.status(200).send(events);
+            const groupByDay = events.reduce((memo, current) => {
+                let date = current.startDate.split('-')[2];
+                if (!memo[date]) {
+                    memo[date] = [];
+                }
+                memo[date].push(current);
+                return memo;
+            }, {})
+
+            res.status(200).send({events:groupByDay});
         })
         .catch(err => {
             console.log(`err getting: api/events line 10`, err);

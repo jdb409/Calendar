@@ -26,5 +26,24 @@ html {
 }
 
 .day {
+    flex-basis: 300px;
+}
 
+.day-card{
+    min-height: 20vh;
+}
+
+.day-card button{
+    position: absolute;
+    bottom: 0px;
+}
+
+.form-modal input{
+    margin-bottom: 5%;
+}
+
+.add-event{
+    display: block;
+    width: 100%;
+    text-align: center;
 }

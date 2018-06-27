@@ -4,15 +4,38 @@ import { connect } from 'react-redux';
 
 import Calendar from './Calendar';
 
+import {getEventsFromServer} from '../store/events';
 
-const Main = () => {
 
-    return (
-        <div id = 'flex-wrapper'>
-            <Calendar />
-        </div>
-    )
+
+class Main extends Component {
+    constructor() {
+        super();
+    }
+
+    componentDidMount() {
+        this.props.getEventsFromServer();
+    }
+
+    render() {
+        console.log(this.props)
+        return (
+            <div id='flex-wrapper'>
+                <Calendar />
+            </div>
+        )
+    }
 
 }
 
-export default Main;
+const mapStateToProps = ({events}) => events;
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        getEventsFromServer: () => {
+            dispatch(getEventsFromServer());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
