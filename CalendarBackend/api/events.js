@@ -47,6 +47,7 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
+    console.log(req.params.id)
     Event.findById(req.params.id)
         .then(event => {
             return event.destroy();

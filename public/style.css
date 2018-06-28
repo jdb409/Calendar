@@ -15,7 +15,7 @@ html {
     justify-content: center;
 
     height: 100vh;
-    width: 80vw;
+    width: 90vw;
 }
 
 .week {
@@ -26,16 +26,11 @@ html {
 }
 
 .day {
-    flex-basis: 300px;
+    flex-basis: 500px;
 }
 
 .day-card{
     min-height: 20vh;
-}
-
-.day-card button{
-    position: absolute;
-    bottom: 0px;
 }
 
 .form-modal input{
@@ -46,4 +41,11 @@ html {
     display: block;
     width: 100%;
     text-align: center;
+    position: absolute;
+    bottom: 0px;
+}
+
+.flex-footer{
+    display: flex;
+    justify-content: space-between;
 }

@@ -20,23 +20,49 @@ export const getEventsFromServer = () => {
     }
 }
 
-// export const postRecord = (record, userId) => {
-//     record.userId = userId;
-//     console.log('postRecord', userId);
-//     return () => {
-//         axios.post(`/api/matchinfo/${userId}`, record)
-//             .then(res => res.data)
-//             .then(() => {
-//                 console.log('hello');
-//                 getRecordsFromServer(userId)
-//             })
-//     }
-// }
+export const postEvent = (event) => {
+    return (dispatch) => {
+        axios.post('/api/events', event)
+            .then(() => {
+                dispatch(getEventsFromServer());
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+}
+
+
+export const updateEvent = (eventId,event) => {
+    console.log('update', event);
+    return (dispatch) => {
+        axios.put(`/api/events/${eventId}`, event)
+            .then(() => {
+                dispatch(getEventsFromServer());
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+}
+
+export const deleteEvent = (eventId) => {
+    return (dispatch) => {
+        axios.delete(`/api/events/${eventId}`)
+            .then(() => {
+                dispatch(getEventsFromServer());
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+}
 
 export default function (state = {}, action) {
     switch (action.type) {
         case GET_EVENTS:
             return Object.assign({}, state, action.events);
+        
         default:
             return state;
     }

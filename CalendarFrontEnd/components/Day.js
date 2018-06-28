@@ -2,28 +2,42 @@ import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
 
 import CreateEvent from './CreateEvent';
+import EventDetail from './EventDetail';
 
 class Day extends Component {
     constructor() {
         super();
         this.state = {
-            open: false
+            addEventModal: false,
+            eventDetailModal: false
         }
-        this.onCloseModal = this.onCloseModal.bind(this);
-        this.onOpenModal = this.onOpenModal.bind(this);
+        this.onCloseAddModal = this.onCloseAddModal.bind(this);
+        this.onOpenAddModal = this.onOpenAddModal.bind(this);
+        this.onCloseDetailModal = this.onCloseDetailModal.bind(this);
+        this.onOpenDetailModal = this.onOpenDetailModal.bind(this);
     }
 
-    onOpenModal() {
-        this.setState({ open: true });
+    onOpenAddModal(e) {
+        this.setState({ addEventModal: true });
     };
 
-    onCloseModal() {
-        this.setState({ open: false });
+    onCloseAddModal() {
+        this.setState({ addEventModal: false });
     };
+
+    onOpenDetailModal(e) {
+        this.setState({ eventDetailModal: true });
+    };
+
+    onCloseDetailModal() {
+        this.setState({ eventDetailModal: false });
+    };
+
+
 
 
     render() {
-        const { open } = this.state;
+        const { addEventModal, eventDetailModal } = this.state;
         const { date, events } = this.props;
         return (
             <div className='card day-card'>
@@ -34,21 +48,33 @@ class Day extends Component {
                     <ul id='days-events'>
                         {events && events.map(event => {
                             return (
-                                <li key = {event.id}>{event.title}</li>
+                                <li key={event.id}>
+                                    <button
+                                        onClick={this.onOpenDetailModal}
+                                    >{event.title}
+                                    </button>
+                                    <Modal
+                                        open={eventDetailModal}
+                                        onClose={this.onCloseDetailModal} center
+                                    >
+                                        <EventDetail event = {event} onCloseDetailModal = {this.onCloseDetailModal} />
+                                    </Modal>
+                                </li>
                             )
                         })}
                     </ul>
                     <button
                         className="btn btn-sm btn-primary add-event"
-                        onClick={this.onOpenModal}
+                        name='asdf'
+                        onClick={this.onOpenAddModal}
                     >Add Event</button>
                     <Modal
-                        open={open}
-                        onClose={this.onCloseModal} center
+                        open={addEventModal}
+                        onClose={this.onCloseAddModal} center
                     >
                         <h1>Add Event</h1>
                         <p>---------------------------------------------------------------------------</p>
-                        <CreateEvent date={date} />
+                        <CreateEvent date={date} onCloseModal = {this.onCloseAddModal}/>
                     </Modal>
                 </div>
             </div>
