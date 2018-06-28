@@ -8,8 +8,9 @@ class CreateEvent extends Component {
         super(props);
         let date = new Date();
         let currentTime = `${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}`;
-        // let fomattedMonth = (date.getMonth().length > 1 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`)
         let currentDate = `${date.getFullYear()}-02-${this.addZero(props.date)}`;
+
+        // event will be passed as props if updating an event
         if (props.event) {
             this.state = {
                 title: props.event.title,
@@ -68,14 +69,14 @@ class CreateEvent extends Component {
         return (
             <div className='form-modal'>
                 <form className='form-group event-form' onSubmit={handleSubmit}>
-                    <label htmlFor="title"><h4>Title</h4></label>
-                    <input className='form-control' name='title' type='title' value={title} onChange={handleChange} />
+                    <label htmlFor="title"><h4>Title (required)</h4></label>
+                    <input className='form-control' name='title' type='title' value={title} onChange={handleChange}/>
                     <label htmlFor="description"><h4>Description</h4></label>
                     <input className='form-control' name='description' type='description' value={description} onChange={handleChange} />
                     <label htmlFor="startDate"><h4>Start Date</h4></label>
-                    <input className='form-control' name='startDate' value={startDate} onChange={handleChange} type='date' disabled={this.props.event ? null : "true"} />
+                    <input className='form-control' name='startDate' value={startDate} min="2018-02-01" max="2018-02-28" onChange={handleChange} type='date' disabled={this.props.event ? null : "true"} />
                     <label htmlFor="endDate"><h4>End Date</h4></label>
-                    <input className='form-control' name='endDate' value={endDate} type='date' onChange={handleChange} />
+                    <input className='form-control' name='endDate' value={endDate} type='date' min={startDate} max="2018-02-28" onChange={handleChange} />
                     <label htmlFor="startTime"><h4>Start Time</h4></label>
                     <input className='form-control' name='startTime' value={startTime} type='time' onChange={handleChange} />
                     <label htmlFor="endTime"><h4>End Time</h4></label>
@@ -83,7 +84,7 @@ class CreateEvent extends Component {
                     <input className='form-input-check' name='allDay' value={allDay} type='checkbox' onChange={handleChange} />
                     <label htmlFor="allDay"><h4>  All Day Event</h4></label>
                     <br />
-                    <button onClick={this.props.onCloseModal}>Submit</button>
+                    <button onClick={this.props.onCloseModal} disabled = {title.length < 1 ? "true": null}>Submit</button>
                 </form>
             </div>
         )

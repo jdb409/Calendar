@@ -18,7 +18,9 @@ class Day extends Component {
     }
 
     onOpenAddModal(e) {
-        this.setState({ addEventModal: true });
+        if (typeof e.target.className === 'string' && e.target.className.includes('day-card')) {
+            this.setState({ addEventModal: true });
+        }
     };
 
     onCloseAddModal() {
@@ -40,42 +42,43 @@ class Day extends Component {
         const { addEventModal, eventDetailModal } = this.state;
         const { date, events } = this.props;
         return (
-            <div className='card day-card'>
-                <div className='card-header'>
-                    {date}
-                </div>
-                <div className='card-body'>
-                    <ul id='days-events'>
-                        {events && events.map(event => {
-                            return (
-                                <li key={event.id}>
-                                    <button
-                                        onClick={this.onOpenDetailModal}
-                                    >{event.title}
-                                    </button>
-                                    <Modal
-                                        open={eventDetailModal}
-                                        onClose={this.onCloseDetailModal} center
-                                    >
-                                        <EventDetail event = {event} onCloseDetailModal = {this.onCloseDetailModal} />
-                                    </Modal>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <button
-                        className="btn btn-sm btn-primary add-event"
-                        name='asdf'
-                        onClick={this.onOpenAddModal}
-                    >Add Event</button>
-                    <Modal
-                        open={addEventModal}
-                        onClose={this.onCloseAddModal} center
-                    >
-                        <h1>Add Event</h1>
-                        <p>---------------------------------------------------------------------------</p>
-                        <CreateEvent date={date} onCloseModal = {this.onCloseAddModal}/>
-                    </Modal>
+            <div
+                id='modalWrapper'
+                onClick={this.onOpenAddModal}
+            >
+                <div className='card day-card'>
+                    <div className='card-header bg-info text-center'>
+                        {date}
+                    </div>
+                    <div className='card-body'>
+                        <ul id='days-events'>
+                            {events && events.map(event => {
+                                return (
+                                    <li key={event.id}>
+                                        <button
+                                            onClick={this.onOpenDetailModal}
+                                        >{event.title}
+                                        </button>
+                                        <Modal
+                                            open={eventDetailModal}
+                                            onClose={this.onCloseDetailModal} center
+                                        >
+                                            <EventDetail event={event} onCloseDetailModal={this.onCloseDetailModal} />
+                                        </Modal>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+
+                        <Modal
+                            open={addEventModal}
+                            onClose={this.onCloseAddModal} center
+                        >
+                            <h1>Add Event</h1>
+                            <p>---------------------------------------------------------------------------</p>
+                            <CreateEvent date={date} onCloseModal={this.onCloseAddModal} />
+                        </Modal>
+                    </div>
                 </div>
             </div>
         )

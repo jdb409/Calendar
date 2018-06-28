@@ -11,7 +11,6 @@ class Calendar extends Component {
         const weeks = [1, 2, 3, 4];
         const days = [1, 2, 3, 4, 5, 6, 7];
         const {events} = this.props;
-        console.log('wqer', this.props);
         return (
             <div id='calendar'>
                 {

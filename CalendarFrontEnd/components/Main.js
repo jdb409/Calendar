@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Calendar from './Calendar';
 
-import {getEventsFromServer} from '../store/events';
+import { getEventsFromServer } from '../store/events';
 
 
 
@@ -20,18 +20,21 @@ class Main extends Component {
     render() {
         console.log(this.props)
         return (
-            <div id='flex-wrapper'>
-                <Calendar />
+            <div>
+                <h1 id='month'>February</h1>
+                <div id='flex-wrapper'>
+                    <Calendar />
+                </div>
             </div>
         )
     }
 
 }
 
-const mapStateToProps = ({events}) => events;
+const mapStateToProps = ({ events }) => events;
 
 const mapDispatchToProps = (dispatch) => {
-    return{
+    return {
         getEventsFromServer: () => {
             dispatch(getEventsFromServer());
         }

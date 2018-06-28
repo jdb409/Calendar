@@ -2,19 +2,23 @@ html {
     box-sizing: border-box;
 }
 
-#flex-wrapper{
+#flex-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+#month {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 0
 }
 
 #calendar {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    height: 100vh;
+    height: 90vh;
     width: 90vw;
 }
 
@@ -22,22 +26,21 @@ html {
     list-style: none;
     display: flex;
     justify-content: space-between;
-
 }
 
 .day {
     flex-basis: 500px;
 }
 
-.day-card{
+.day-card {
     min-height: 20vh;
 }
 
-.form-modal input{
+.form-modal input {
     margin-bottom: 5%;
 }
 
-.add-event{
+.add-event {
     display: block;
     width: 100%;
     text-align: center;
@@ -45,7 +48,16 @@ html {
     bottom: 0px;
 }
 
-.flex-footer{
+.flex-footer {
     display: flex;
     justify-content: space-between;
+}
+
+#days-events li {
+    margin-top: 5%;
+}
+
+#more-modal {
+    margin: 10% auto;
+    width: 100%;
 }

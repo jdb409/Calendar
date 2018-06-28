@@ -5,15 +5,37 @@ router.get('/', (req, res) => {
     Event.findAll()
         .then(events => {
             const groupByDay = events.reduce((memo, current) => {
-                let date = current.startDate.split('-')[2];
-                if (!memo[date]) {
-                    memo[date] = [];
+                let startDate = current.startDate.split('-')[2];
+                let endDate = current.endDate.split('-')[2];
+                // console.log(date, String(Number(startDate) + 1).padStart(2, '0'));
+                if (!memo[startDate]) {
+                    memo[startDate] = [];
                 }
-                memo[date].push(current);
+                memo[startDate].push(current);
+                if (startDate != endDate && !isNaN(startDate)) {
+                    console.log(current);
+
+                    do {
+                        startDate = String(Number(startDate) + 1).padStart(2, '0');
+                        
+                        let formatted = current.startDate.split('-');
+                        formatted.splice(2,1);
+                        formatted.push(startDate)
+                        console.log(current.startDate)
+                        current.startDate = formatted.join("-");
+
+                        if (!memo[startDate]) {
+                            memo[startDate] = [];
+                        }
+                        memo[startDate].push(current);
+
+                    } while (startDate != endDate)
+                }
+
                 return memo;
             }, {})
 
-            res.status(200).send({events:groupByDay});
+            res.status(200).send({ events: groupByDay });
         })
         .catch(err => {
             console.log(`err getting: api/events line 10`, err);
