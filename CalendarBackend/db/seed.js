@@ -45,6 +45,10 @@ const seed = () => {
                 })
             ])
         })
+        .then(() => {
+            console.log('seeded');
+            return;
+        })
 }
 
-module.exports = seed;
+seed();

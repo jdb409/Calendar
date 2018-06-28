@@ -58,7 +58,6 @@ class CreateEvent extends Component {
             this.props.updateEvent(this.props.event.id, this.state);
             return;
         } else {
-            console.log('submit')
             this.props.postEvent(this.state)
         }
     }

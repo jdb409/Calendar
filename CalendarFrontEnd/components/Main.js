@@ -21,7 +21,7 @@ class Main extends Component {
         console.log(this.props)
         return (
             <div>
-                <h1 id='month'>February</h1>
+                <h1 id='month'><strong>February</strong></h1>
                 <div id='flex-wrapper'>
                     <Calendar />
                 </div>

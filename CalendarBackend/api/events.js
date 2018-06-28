@@ -7,11 +7,14 @@ router.get('/', (req, res) => {
             const groupByDay = events.reduce((memo, current) => {
                 let startDate = current.startDate.split('-')[2];
                 let endDate = current.endDate.split('-')[2];
-                // console.log(date, String(Number(startDate) + 1).padStart(2, '0'));
+
                 if (!memo[startDate]) {
                     memo[startDate] = [];
                 }
+
                 memo[startDate].push(current);
+
+                // check for multiday event
                 if (startDate != endDate && !isNaN(startDate)) {
                     console.log(current);
 

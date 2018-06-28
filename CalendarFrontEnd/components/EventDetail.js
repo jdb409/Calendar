@@ -31,7 +31,7 @@ class EventDetail extends Component {
         this.props.deleteEvent(this.props.event.id);
     }
     render() {
-        const {addEventModal} = this.state;
+        const { addEventModal } = this.state;
         const { event } = this.props;
         return (
             <div className='card event-modal'>
@@ -50,7 +50,8 @@ class EventDetail extends Component {
                     <button
                         className='btn btn-success'
                         onClick={this.onOpenAddModal}
-                    >Update</button>
+                    >Update
+                    </button>
                     <Modal
                         open={addEventModal}
                         onClose={this.onCloseAddModal} center
